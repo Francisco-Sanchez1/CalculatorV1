@@ -22,8 +22,13 @@ class Calculator {
 
     //Let's make a run method that get's input's and assigns them to variables to pass into calculate.
     public void Run(){
-        //Ask for input 1
+        //Ask for input 1 and 2 then calculate
+        //While loop here that loops until "Exit or exit is typed"
+        Boolean calcButton = true;
         Scanner scanner = new Scanner(System.in);
+
+        while (calcButton == true) {
+
                         
         System.out.println("Enter your first number: ");
         int value1 = scanner.nextInt(); 
@@ -37,9 +42,12 @@ class Calculator {
         finalAnswer = Calculate(value1, value2, operator);
         System.out.println(finalAnswer);
 
-
+        System.out.println("Would you like to continue?");
+        String exitButton = scanner.next();
+        calcButton = calcOnOrOff(exitButton);
+        
+        }
         scanner.close();
-
     }
 
     //Calculate Method does the arithmatic 
@@ -60,6 +68,16 @@ class Calculator {
             return 0;
         }
         return answer;
+    }
+
+    public boolean calcOnOrOff(String x){
+        if (x.contentEquals("Exit") ||x.contentEquals("exit")) {
+            return false;
+        
+        } 
+        else {
+            return true; 
+        }
     }
 
     public void divisionOperation(int x, int y){
