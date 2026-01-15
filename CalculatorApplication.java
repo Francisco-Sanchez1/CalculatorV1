@@ -1,9 +1,15 @@
 import java.util.Scanner;
+//V1: Basic calculations + - * /
+//V2: Continuous Input (loop until exit), Input Validation, Division by zero handaling, Clear error message
 
 public class CalculatorApplication {
         public static void main (String [] args){
             Scanner scanner = new Scanner(System.in);
+            String appOn = "Run";
 
+            while (appOn == "Run") {
+            
+            
             System.out.println("Enter your first number: ");
             int value1 = scanner.nextInt(); 
             
@@ -14,8 +20,12 @@ public class CalculatorApplication {
             char operator = scanner.next().charAt(0);
 
             Calculator TI84 = new Calculator();
-
             TI84.Calculate(value1, value2, operator);
+
+            System.out.println("Would you like to exit?");
+            appOn = scanner.next();
+
+            }  
 
             scanner.close();
     }
