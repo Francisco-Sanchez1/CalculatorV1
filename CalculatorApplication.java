@@ -4,61 +4,73 @@ import java.util.Scanner;
 
 public class CalculatorApplication {
         public static void main (String [] args){
-            Scanner scanner = new Scanner(System.in);
-            String appOn = "Run";
+            // Main should read like a sentence not a complex alg
+            // Main should not contain business logic, handle input, calculation + output
+            // make a class of Calculator
+            // Run the calculator normally
 
-            while (appOn == "Run") {
-            
-            
-            System.out.println("Enter your first number: ");
-            int value1 = scanner.nextInt(); 
-            
-            System.out.println("Enter your second number");
-            int value2 = scanner.nextInt();
-
-            System.out.println("What operation would you like to preform(+, -, *, / ?");
-            char operator = scanner.next().charAt(0);
 
             Calculator TI84 = new Calculator();
-            TI84.Calculate(value1, value2, operator);
+            TI84.Run();      
 
-            System.out.println("Would you like to exit?");
-            appOn = scanner.next();
 
-            }  
-
-            scanner.close();
     }
 }
 
 class Calculator {
-    int answer;
+    int finalAnswer;
+
+    //Let's make a run method that get's input's and assigns them to variables to pass into calculate.
+    public void Run(){
+        //Ask for input 1
+        Scanner scanner = new Scanner(System.in);
+                        
+        System.out.println("Enter your first number: ");
+        int value1 = scanner.nextInt(); 
+        
+        System.out.println("Enter your second number");
+        int value2 = scanner.nextInt();
+
+        System.out.println("What operation would you like to preform(+, -, *, / ?");
+        char operator = scanner.next().charAt(0);
+        
+        finalAnswer = Calculate(value1, value2, operator);
+        System.out.println(finalAnswer);
 
 
-    public void Calculate(int value1, int value2, char operation) {
+        scanner.close();
+
+    }
+
+    //Calculate Method does the arithmatic 
+    public int Calculate(int value1, int value2, char operation) {
+        int answer;
         if (operation == '+'){
-            answer = value1 + value2;
-            System.out.println("Answer: " + answer);
-            
+            answer = value1 + value2;            
         }
         else if (operation == '-') {
             answer = value1 - value2;
-            System.out.println("Answer: " + answer);
 
         }
         else if (operation == '*') {
             answer = value1 * value2;
-            System.out.println("Answer: " + answer);
             
         }
-        else if (operation == '/') {
-            answer = (value1 / value2);
-            System.out.println("Answer: " + answer);
+        else{
+            return 0;
+        }
+        return answer;
+    }
+
+    public void divisionOperation(int x, int y){
+        int ans;
+        if (y == 0){
+            System.out.println("Undefined");
         }
         else{
-            System.out.println("Not Valid Operation");
-
+            ans = x / y;
+            System.out.println("Answer: " + ans);
         }
     }
 
-}
+    }
