@@ -24,6 +24,7 @@ class Calculator {
     public void Run(){
         //Ask for input 1 and 2 then calculate
         //While loop here that loops until "Exit or exit is typed"
+        //Edge cases are invalid operator and 0 for the 2nd value
         Boolean calcButton = true;
         Scanner scanner = new Scanner(System.in);
 
@@ -38,36 +39,43 @@ class Calculator {
 
         System.out.println("What operation would you like to preform(+, -, *, / ?");
         char operator = scanner.next().charAt(0);
+        //alright it seems like doing checker in calculate is difficult to restart loop
+        //Going to try to do checker before calculation then the inputs will be clean 
+        //CleanData Method basically checks i
         
-        finalAnswer = Calculate(value1, value2, operator);
-        System.out.println(finalAnswer);
+        if (divisionChecker(value2) == false)
+        {
+            calcButton = askToExit(scanner);
+        }
+        else {
+            Calculate(value1,value2,operator);
+            calcButton = askToExit(scanner);
+        }
 
-        System.out.println("Would you like to continue?");
-        String exitButton = scanner.next();
-        calcButton = calcOnOrOff(exitButton);
         
+        //asker(Method)
+
         }
         scanner.close();
     }
 
     //Calculate Method does the arithmatic 
-    public int Calculate(int value1, int value2, char operation) {
-        int answer;
-        if (operation == '+'){
-            answer = value1 + value2;            
-        }
-        else if (operation == '-') {
-            answer = value1 - value2;
+    public void Calculate(int value1, int value2, char operation) {
+        
+        switch (operation) {
+            case '+' : System.out.print(value1 + value2 + "\n");
+                break;
+            case '-' : System.out.print(value1 - value2 + "\n");
+                break;
+            case '*' : System.out.print(value1 * value2 + "\n");
+                break;
+            case '/' : System.out.print(value1 / value2 + "\n");
+                break;
+            default:
+                break;
 
         }
-        else if (operation == '*') {
-            answer = value1 * value2;
-            
-        }
-        else{
-            return 0;
-        }
-        return answer;
+    
     }
 
     public boolean calcOnOrOff(String x){
@@ -80,15 +88,45 @@ class Calculator {
         }
     }
 
-    public void divisionOperation(int x, int y){
-        int ans;
+    public boolean divisionChecker(int y){
+        
         if (y == 0){
             System.out.println("Undefined");
-        }
-        else{
-            ans = x / y;
-            System.out.println("Answer: " + ans);
+            return false;
+        } 
+        else {
+            return true;
         }
     }
 
+    
+    //How can I keep the loop going after division by zero?
+    //I can ask again would you like to continue? or a asker method
+    //If there is divsion error I can say not possible try again or exit?
+    //If it's a normal and finished the operatio can just ask to continue or exit
+    //What will I need a public method tht return most likley a boolean value and if 
+    //that bool value is false then it will kick out of while loop in the run method
+
+    public boolean askToExit (Scanner scanner) {
+        
+        boolean ans;
+        System.out.println("Would you like to continue?"); //get data
+        String calcOnorOffAns = scanner.next(); // assign it to a var
+        
+        //IF specific answer exit then return ans to false
+        //Then once true or false is returned it can be assigned to calcButton.
+
+        if (calcOnorOffAns.contentEquals("Exit") || calcOnorOffAns.contentEquals("exit"))
+        {
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+
+        
+    
     }
+    
+}
