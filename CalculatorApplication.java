@@ -72,6 +72,7 @@ class Calculator {
             case '/' : System.out.print(value1 / value2 + "\n");
                 break;
             default:
+                System.err.println("That's not a proper operation");
                 break;
 
         }
